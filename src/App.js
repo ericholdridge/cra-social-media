@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
+// Components
 import About from "./components/Pages/About";
 import Home from "./components/Pages/Home";
 

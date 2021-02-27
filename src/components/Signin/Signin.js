@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,8 +6,16 @@ import {
   faTwitter,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import { AuthenticationContext } from "../../context/Authentication";
 
 const Signin = () => {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleFormSubmit,
+  } = useContext(AuthenticationContext);
   return (
     <div className="container mx-auto py-20 flex-col items-center">
       <div className="pb-10">
@@ -30,7 +38,12 @@ const Signin = () => {
             <label htmlFor="email" className="font-medium text-gray-700 pb-1">
               Email address
             </label>
-            <input type="text" className="h-10 border-2 rounded-lg pl-2" />
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              className="h-10 border-2 rounded-lg pl-2"
+            />
           </div>
           <div className="flex flex-col mt-6">
             <label
@@ -39,7 +52,14 @@ const Signin = () => {
             >
               Password
             </label>
-            <input type="text" className="h-10 border-2 rounded-lg pl-2" />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              required
+              minLength="8"
+              name="password"
+              className="h-10 border-2 rounded-lg pl-2"
+            />
           </div>
           <div className="flex items-center justify-between pt-6">
             <div className="flex items-center">
@@ -55,7 +75,10 @@ const Signin = () => {
               Forgot your password?
             </Link>
           </div>
-          <button className="bg-blue-600 py-3 text-white font-medium w-full rounded-lg mt-6 tracking-wide">
+          <button
+            onClick={(e) => handleFormSubmit(e)}
+            className="bg-blue-600 py-3 text-white font-medium w-full rounded-lg mt-6 tracking-wide"
+          >
             Sign in
           </button>
           <div className="py-6 flex items-center justify-between">
